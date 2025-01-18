@@ -8,32 +8,33 @@
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(90deg, #ff8282, #7e2f21);            
+            background: linear-gradient(90deg, #ff8282, #7e2f21);
             font-family: 'Comic Sans MS', cursive;
             overflow: hidden;
         }
 
         .container {
             text-align: center;
-            padding: 50px;
+            padding: 20px;
             position: relative;
             overflow: hidden;
             height: 100vh;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin: 20px 0;
             color: white;
         }
 
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: white;
         }
 
         .snoopy {
-            width: 450px;
+            width: 80%;
+            max-width: 450px;
             margin: 20px auto;
             display: block;
             position: relative;
@@ -41,8 +42,8 @@
         }
 
         .balloon {
-            width: 60px;
-            height: 80px;
+            width: 40px;
+            height: 60px;
             background: radial-gradient(circle at 30% 30%, #ff6b6b, #ff3b3b);
             border-radius: 50%;
             position: absolute;
@@ -67,11 +68,11 @@
 
         .balloon svg {
             position: absolute;
-            top: 80px;
+            top: 60px;
             left: 50%;
             transform: translateX(-50%);
             width: 2px;
-            height: 80px;
+            height: 60px;
         }
 
         .balloon path {
@@ -107,8 +108,8 @@
         }
 
         .confetti {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background-color: yellow;
             position: absolute;
             border-radius: 50%;
@@ -128,7 +129,7 @@
 
         .message {
             position: absolute;
-            font-size: 1.5rem;
+            font-size: 1rem;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             z-index: 10;
@@ -142,6 +143,25 @@
             }
             100% {
                 opacity: 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .snoopy {
+                width: 450px;
+            }
+
+            .balloon {
+                width: 60px;
+                height: 80px;
             }
         }
     </style>
@@ -178,7 +198,6 @@
             "¡Te adoro!",
             "¡Eres la mejor!",
             "¡Te quiero mucho y dos costales!",
-
         ];
 
         const createBalloon = () => {
