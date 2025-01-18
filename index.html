@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(90deg, #ff8282, #7e2f21);            
+            font-family: 'Comic Sans MS', cursive;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 20px 0;
+            color: white;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .snoopy {
+            width: 450px;
+            margin: 20px auto;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .balloon {
+            width: 60px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #ff6b6b, #ff3b3b);
+            border-radius: 50%;
+            position: absolute;
+            bottom: -10px;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer; /* Hace que los globos sean clickeables */
+        }
+
+        .balloon:before {
+            content: '';
+            width: 50%;
+            height: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            position: absolute;
+            top: 10%;
+            left: 20%;
+            transform: rotate(-20deg);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .balloon svg {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 80px;
+        }
+
+        .balloon path {
+            stroke: rgba(255, 255, 255, 0.8);
+            stroke-width: 1.5px;
+            stroke-dasharray: 4, 4;
+            fill: none;
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-50vh) translateX(-20px);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(20px);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes wave {
+            0% {
+                stroke-dashoffset: 0;
+            }
+            100% {
+                stroke-dashoffset: 200;
+            }
+        }
+
+        .confetti {
+            width: 10px;
+            height: 10px;
+            background-color: yellow;
+            position: absolute;
+            border-radius: 50%;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-90vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0.5;
+            }
+        }
+
+        .message {
+            position: absolute;
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            pointer-events: none;
+            animation: fade-out 2s forwards;
+        }
+
+        @keyframes fade-out {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="birthdayMusic" src="cumple.mp3" autoplay loop></audio>
+    <div class="container">
+        <h1>¡Feliz Cumpleaños Nallely!</h1>
+        <h2>Que tengas un día tan especial como tú ❤️</h2>
+        <h2>Felices 20 años, Nallely! 🎉</h2>
+        <img src="snoopy.gif" alt="Snoopy" class="snoopy">
+    </div>
+
+    <script>
+        const container = document.querySelector('.container');
+        const colors = [
+            'linear-gradient(135deg, #d8b4ff, #8e44ad)', 
+            'linear-gradient(135deg, #f5d142, #f39c12)', 
+            'linear-gradient(135deg, #a29bfe, #6c5ce7)', 
+            'linear-gradient(135deg, #fdfc47, #f9a825)'
+        ];
+        const confettiColors = ['yellow', 'pink', 'cyan', 'lime', 'orange', 'white'];
+        const messages = [
+            "Te amo ❤️",
+            "Sé feliz 🎉",
+            "¡Ya 20! 🎂",
+            "Te quiero mucho",
+            "Disfruta tu día 🌟",
+            "Eres especial",
+            "¡Cumple muchos más! ✨",
+            "Te mereces lo mejor 🎈",
+            "¡Felicidades! 🎊",
+            "¡Eres increíble!",
+            "¡Te adoro!",
+            "¡Eres la mejor!",
+            "¡Te quiero mucho y dos costales!",
+
+        ];
+
+        const createBalloon = () => {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.animationDuration = Math.random() * 3 + 4 + 's';
+
+            balloon.addEventListener('click', (e) => {
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                const message = document.createElement('div');
+                message.className = 'message';
+                message.textContent = randomMessage;
+                message.style.left = `${e.clientX}px`;
+                message.style.top = `${e.clientY}px`;
+                container.appendChild(message);
+
+                setTimeout(() => {
+                    message.remove();
+                }, 2000);
+
+                balloon.remove();
+            });
+
+            const svg = `
+                <svg width="2" height="60" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 0 C5 10, -5 20, 1 30 C5 40, -5 50, 1 60" />
+                </svg>
+            `;
+            balloon.innerHTML = svg;
+
+            container.appendChild(balloon);
+
+            setTimeout(() => {
+                balloon.remove();
+            }, 6000);
+        };
+
+        const createConfetti = () => {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+
+            container.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        };
+
+        setInterval(createBalloon, 400);
+        setInterval(createConfetti, 200);
+    </script>
+</body>
+</html>
