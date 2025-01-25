@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,28 +14,52 @@
             overflow: hidden;
         }
 
+        .card {
+            width: 300px;
+            height: 300px;
+            background: url('snoopy2.png');
+            background-position: center;
+            background-size: cover;
+            margin: 20vh auto;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7e2f21;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
         .container {
             text-align: center;
-            padding: 20px;
+            padding: 50px;
             position: relative;
             overflow: hidden;
             height: 100vh;
+            display: none;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin: 20px 0;
             color: white;
         }
 
         h2 {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: white;
         }
 
         .snoopy {
-            width: 80%;
-            max-width: 450px;
+            width: 450px;
             margin: 20px auto;
             display: block;
             position: relative;
@@ -42,15 +67,15 @@
         }
 
         .balloon {
-            width: 40px;
-            height: 60px;
+            width: 60px;
+            height: 80px;
             background: radial-gradient(circle at 30% 30%, #ff6b6b, #ff3b3b);
             border-radius: 50%;
             position: absolute;
             bottom: -10px;
             animation: float 6s ease-in-out infinite;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), inset 0 -5px 10px rgba(0, 0, 0, 0.2);
-            cursor: pointer; /* Hace que los globos sean clickeables */
+            cursor: pointer;
         }
 
         .balloon:before {
@@ -68,11 +93,11 @@
 
         .balloon svg {
             position: absolute;
-            top: 60px;
+            top: 80px;
             left: 50%;
             transform: translateX(-50%);
             width: 2px;
-            height: 60px;
+            height: 80px;
         }
 
         .balloon path {
@@ -88,10 +113,12 @@
                 transform: translateY(0) translateX(0);
                 opacity: 1;
             }
+
             50% {
                 transform: translateY(-50vh) translateX(-20px);
                 opacity: 0.9;
             }
+
             100% {
                 transform: translateY(-100vh) translateX(20px);
                 opacity: 0.8;
@@ -102,14 +129,15 @@
             0% {
                 stroke-dashoffset: 0;
             }
+
             100% {
                 stroke-dashoffset: 200;
             }
         }
 
         .confetti {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background-color: yellow;
             position: absolute;
             border-radius: 50%;
@@ -121,6 +149,7 @@
                 transform: translateY(-90vh) rotate(0deg);
                 opacity: 1;
             }
+
             100% {
                 transform: translateY(100vh) rotate(360deg);
                 opacity: 0.5;
@@ -129,7 +158,7 @@
 
         .message {
             position: absolute;
-            font-size: 1rem;
+            font-size: 1.5rem;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             z-index: 10;
@@ -141,33 +170,17 @@
             0% {
                 opacity: 1;
             }
+
             100% {
                 opacity: 0;
             }
         }
-
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            .snoopy {
-                width: 450px;
-            }
-
-            .balloon {
-                width: 60px;
-                height: 80px;
-            }
-        }
     </style>
 </head>
+
 <body>
-    <audio id="birthdayMusic" src="cumple.mp3" autoplay loop></audio>
+    <audio id="birthdayMusic" src="cumple.mp3" loop></audio>
+
     <div class="container">
         <h1>¡Feliz Cumpleaños Nallely!</h1>
         <h2>Que tengas un día tan especial como tú ❤️</h2>
@@ -176,11 +189,14 @@
     </div>
 
     <script>
+        const card = document.getElementById('startCard');
         const container = document.querySelector('.container');
+        const birthdayMusic = document.getElementById('birthdayMusic');
+
         const colors = [
-            'linear-gradient(135deg, #d8b4ff, #8e44ad)', 
-            'linear-gradient(135deg, #f5d142, #f39c12)', 
-            'linear-gradient(135deg, #a29bfe, #6c5ce7)', 
+            'linear-gradient(135deg, #d8b4ff, #8e44ad)',
+            'linear-gradient(135deg, #f5d142, #f39c12)',
+            'linear-gradient(135deg, #a29bfe, #6c5ce7)',
             'linear-gradient(135deg, #fdfc47, #f9a825)'
         ];
         const confettiColors = ['yellow', 'pink', 'cyan', 'lime', 'orange', 'white'];
@@ -198,6 +214,7 @@
             "¡Te adoro!",
             "¡Eres la mejor!",
             "¡Te quiero mucho y dos costales!",
+
         ];
 
         const createBalloon = () => {
@@ -251,8 +268,16 @@
             }, 3000);
         };
 
-        setInterval(createBalloon, 400);
-        setInterval(createConfetti, 200);
+        const startCelebration = () => {
+            birthdayMusic.play();
+            card.style.display = 'none';
+            container.style.display = 'block';
+            setInterval(createBalloon, 400);
+            setInterval(createConfetti, 200);
+        };
+
+        card.addEventListener('click', startCelebration);
     </script>
 </body>
+
 </html>
