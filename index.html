@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -113,12 +112,10 @@
                 transform: translateY(0) translateX(0);
                 opacity: 1;
             }
-
             50% {
                 transform: translateY(-50vh) translateX(-20px);
                 opacity: 0.9;
             }
-
             100% {
                 transform: translateY(-100vh) translateX(20px);
                 opacity: 0.8;
@@ -129,7 +126,6 @@
             0% {
                 stroke-dashoffset: 0;
             }
-
             100% {
                 stroke-dashoffset: 200;
             }
@@ -149,7 +145,6 @@
                 transform: translateY(-90vh) rotate(0deg);
                 opacity: 1;
             }
-
             100% {
                 transform: translateY(100vh) rotate(360deg);
                 opacity: 0.5;
@@ -170,15 +165,17 @@
             0% {
                 opacity: 1;
             }
-
             100% {
                 opacity: 0;
             }
         }
     </style>
 </head>
-
 <body>
+    <div class="card" id="startCard">
+    </div>
+    
+
     <audio id="birthdayMusic" src="cumple.mp3" loop></audio>
 
     <div class="container">
@@ -194,9 +191,9 @@
         const birthdayMusic = document.getElementById('birthdayMusic');
 
         const colors = [
-            'linear-gradient(135deg, #d8b4ff, #8e44ad)',
-            'linear-gradient(135deg, #f5d142, #f39c12)',
-            'linear-gradient(135deg, #a29bfe, #6c5ce7)',
+            'linear-gradient(135deg, #d8b4ff, #8e44ad)', 
+            'linear-gradient(135deg, #f5d142, #f39c12)', 
+            'linear-gradient(135deg, #a29bfe, #6c5ce7)', 
             'linear-gradient(135deg, #fdfc47, #f9a825)'
         ];
         const confettiColors = ['yellow', 'pink', 'cyan', 'lime', 'orange', 'white'];
@@ -279,5 +276,4 @@
         card.addEventListener('click', startCelebration);
     </script>
 </body>
-
 </html>
